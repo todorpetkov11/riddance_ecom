@@ -1,3 +1,4 @@
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -33,6 +34,15 @@ class ProductModel(models.Model):
     thumbnail = models.FileField(
         upload_to='products/thumbnails/'
     )
+
+    def save(self):
+        super(ProductModel, self).save()
+        img = Image.open(self.thumbnail.path)
+
+        if img.height > 300 or img.width > 300:
+            new_img = (300, 300)
+            img.thumbnail(new_img)
+            img.save(self.thumbnail.path)
 
 
 class ImageModel(models.Model):
