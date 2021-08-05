@@ -1,22 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:2%">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    <button class="navbar-expand" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <li><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-            <li><a class="nav-link" href="{% url 'add product' %}">Add new product</a></li>
+            <li class="nav-item"><a class="nav-link waves-effect" href="{% url 'landing' %}">About us</a></li>
+            <li class="nav-item"><a class="nav-link waves-effect" href="{% url 'browse' %}">Browse</a></li>
+            <li class="nav-item"><a class="nav-link waves-effect" href="{% url 'add product' %}">Add new product</a>
+            </li>
             {% if request.user.is_authenticated %}
-
                 <li class="nav-item">
                     <a class="nav-link waves-effect" href="{% url 'profile details' %}">
-                        <span class="clearfix d-none d-sm-inline-block"> {{ request.user.profile.nickname }} </span>
+                        <span class="clearfix d-none d-sm-inline-block"> {{ request.user.profile.full_name }} </span>
                     </a>
+
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link waves-effect">
-                        <span class="badge red z-depth-1 mr-1">  </span>
+                    <a href="{% url 'cart details' %}" class="nav-link waves-effect">
+
+                        <span class="badge red z-depth-1 mr-1"> {{ request.user.cart.items.count }} </span>
                         <i class="fas fa-shopping-cart"></i>
                         <span class="clearfix d-none d-sm-inline-block"> Cart </span>
                     </a>

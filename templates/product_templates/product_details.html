@@ -18,7 +18,12 @@
                         <a href="{% url 'delete product' product.id %}" class="btn btn-danger">Delete</a>
                     </div>
                 {% else %}
-                    <a href="" class="btn btn-success">Add to Cart</a>
+                    {% if not is_in_cart %}
+                        <a href="{% url 'add to cart' product.id %}" class="btn btn-blue">Add to cart
+                            <i class="fas fa-shopping-cart"></i></a>
+                    {% else %}
+                        <a href="{% url 'remove from cart' product.id %}" class="btn btn-danger">Remove from cart</a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
