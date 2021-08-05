@@ -3,12 +3,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from accounts.models import RiddanceProfile
+from accounts.models import RiddanceProfile, ShippingAddress
+from core.forms import BootstrapFormMixin
 
 UserModel = get_user_model()
 
 
-class UserLoginForm(forms.Form):
+class UserLoginForm(BootstrapFormMixin, forms.Form):
     user = None
     email = forms.EmailField()
     password = forms.CharField(
@@ -28,13 +29,19 @@ class UserLoginForm(forms.Form):
         return self.user
 
 
-class UserRegisterForm(UserCreationForm):
+class UserRegisterForm(BootstrapFormMixin, UserCreationForm):
     class Meta:
         model = UserModel
         fields = ('email',)
 
 
-class RiddanceProfileForm(forms.ModelForm):
+class RiddanceProfileForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = RiddanceProfile
-        fields = ('profile_image', 'nickname')
+        fields = ('profile_image', 'full_name')
+
+
+class ShippingAddressForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = ShippingAddress
+        exclude = ('user',)
