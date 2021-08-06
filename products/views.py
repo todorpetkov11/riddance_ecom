@@ -25,7 +25,7 @@ def add_product(request):
             for form in formset.cleaned_data:
                 if form:
                     image = form['image']
-                    photo = ImageModel(product=product, image=image)
+                    photo = ImageModel(product=product, image=image, user_id=request.user.id)
                     photo.save()
         return redirect('browse')
     else:
@@ -33,6 +33,13 @@ def add_product(request):
         formset = image_form_set(queryset=ImageModel.objects.none())
         context = {'product_form': product_form, 'formset': formset}
         return render(request, 'product_templates/add_product.html', context)
+
+
+"""
+        Goes to the add product form.
+        
+        Also creates a model formset for the product images.
+"""
 
 
 @login_required()
@@ -57,6 +64,12 @@ def edit_product(request, pk):
         formset = ImageFormSet(instance=product_to_edit)
         context = {'product_form': product_form, 'formset': formset, 'product': product_to_edit}
         return render(request, 'product_templates/edit_product.html', context)
+
+
+"""
+        Goes to the edit product form.
+        Implements inline formset for the images' editing form.
+"""
 
 
 @login_required()

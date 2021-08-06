@@ -45,7 +45,14 @@ class ProductModel(models.Model):
             img.save(self.thumbnail.path)
 
 
+"""
+        def save(self) overrides the thumbanail save, resizing it
+        to the proper dimensions.
+"""
+
+
 class ImageModel(models.Model):
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='images')
     image = models.FileField(upload_to='products/')
-    default = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        UserModel, on_delete=models.CASCADE, null=True)
