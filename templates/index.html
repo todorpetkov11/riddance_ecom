@@ -1,0 +1,36 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+    <section class="text-center mb-4">
+        <div class="row">
+            {% for product in object_list %}
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card-body">
+                        <div class="view overlay">
+                            <img src="{{ product.thumbnail.url }}" class="card-img-top" width="150" height="150">
+                            <a href="{% url 'product details' product.id %}">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body text-center">
+                            <a href="" class="grey-text">
+                                <h5>{{ product.category }}</h5>
+                            </a>
+                            <strong>
+                                <h5>
+                                    <a href="{% url 'product details' product.id %}"
+                                       class="dark-grey-text">{{ product.name }}
+                                    </a>
+                                </h5>
+                                <h4>
+                                    <a href="{% url 'product details' product.id %}"
+                                       class="font-weight-bold blue-text">BGN {{ product.price }}
+                                    </a>
+                                </h4>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

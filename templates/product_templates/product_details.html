@@ -1,0 +1,44 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+
+    <div class="container">
+        <div class="d-flex">
+            <div class="d-inline p-2 w-50">
+                <img src="{{ product.thumbnail.url }}" class="w-50 rounded mx-auto d-block">
+            </div>
+            <div class="d-inline p-2 w-50">
+                <div class="d-flex justify-content-between">
+                    <h5>Name:</u> {{ product.name }}</h5>
+                    <h5>Price:</u> {{ product.price }}$</h5>
+                </div>
+                <p>{{ product.description }}</p>
+                {% if is_owner %}
+                    <div>
+                        <a href="{% url 'edit product' product.id %}" class="btn btn-success">Edit</a>
+                        <a href="{% url 'delete product' product.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                {% else %}
+                    {% if not is_in_cart %}
+                        <a href="{% url 'add to cart' product.id %}" class="btn btn-blue">Add to cart
+                            <i class="fas fa-shopping-cart"></i></a>
+                    {% else %}
+                        <a href="{% url 'remove from cart' product.id %}" class="btn btn-danger">Remove from cart</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <h2 class='text-center'>More photos</h2>
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card" style="width: 18rem;">
+                    {% for image in images %}
+                        <img src="{{ image.image.url }}" alt="No image">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

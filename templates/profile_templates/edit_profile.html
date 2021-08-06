@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+        <section class="mb-4">
+            <div class="row wow fadeIn">
+                <div class='col-6 offset-3'>
+                    <div class="text-lg-center">
+                        <h1 style="padding-bottom: 50px">{% trans "Edit profile" %}</h1>
+                        <form class="signup" id="signup_form" method="post" action="{% url 'edit profile' %}"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            {{ shipping_form.as_p }}
+                            <button class='btn btn-primary' type="submit">{% trans "EDIT" %} &raquo;</button>
+                        </form>
+
+                    </div>
+                </div>
+        </section>
+    </div>
+{% endblock %}
