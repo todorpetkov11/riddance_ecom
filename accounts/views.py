@@ -55,6 +55,11 @@ def profile_details(request):
     return render(request, 'profile_templates/profile_details.html', context)
 
 
+"""
+        Goes to the authenticated user's profile page.
+"""
+
+
 @login_required()
 def edit_profile(request):
     profile = RiddanceProfile.objects.get(pk=request.user.id)
@@ -76,3 +81,8 @@ def edit_profile(request):
         'profile': profile
     }
     return render(request, 'profile_templates/edit_profile.html', context)
+
+
+"""
+        Goes to the editing form of the authenticated user's profile.
+"""
