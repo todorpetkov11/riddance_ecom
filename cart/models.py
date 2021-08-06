@@ -9,7 +9,7 @@ class CartProduct(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(RiddanceUser, on_delete=models.CASCADE, primary_key=True, related_name='cart')
+    user = models.OneToOneField(RiddanceUser, on_delete=models.CASCADE, primary_key=True, related_name='cart')
     items = models.ManyToManyField(CartProduct)
     ordered = models.BooleanField(default=False)
 

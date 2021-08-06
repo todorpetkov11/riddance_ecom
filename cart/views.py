@@ -15,6 +15,12 @@ def get_cart(request):
     return cart
 
 
+"""
+        Gets the current user's cart or of it doesn't exist
+        it creates a new one saves it to the database.
+"""
+
+
 def add_to_cart(request, pk):
     product = ProductModel.objects.get(pk=pk)
     item, created = CartProduct.objects.get_or_create(product=product)
@@ -26,6 +32,15 @@ def add_to_cart(request, pk):
         cart.items.add(item)
         messages.info(request, "Item added to cart")
         return redirect(request.META.get('HTTP_REFERER'))
+
+
+"""
+        Converts a product object into a cart product object and
+        checks and checks if it is already in the current user's 
+        cart.
+        Displays a massage and redirects to the previous page
+        afterwards.
+"""
 
 
 def remove_from_cart(request, pk):
@@ -44,6 +59,17 @@ def remove_from_cart(request, pk):
         return redirect(request.META.get('HTTP_REFERER'))
 
 
+"""
+        Gets or creates a cart product object and
+        checks and checks if it is already in the current user's 
+        cart.
+        Displays a massage and redirects to the previous page
+        afterwards.
+        If the cart is emptied by removing the item from the
+        items' table, it deletes both the CartProduct and the Cart.
+"""
+
+
 def cart_details(request):
     cart = get_cart(request)
     items = cart.items.all()
@@ -52,3 +78,8 @@ def cart_details(request):
         'cart': cart,
     }
     return render(request, 'cart_details.html', context)
+
+
+"""
+        Displays the cart and the items that are currently in it.
+"""
