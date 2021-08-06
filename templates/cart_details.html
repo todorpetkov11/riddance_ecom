@@ -36,21 +36,18 @@
                         <tr>
                             <td colspan='5'>Your cart is empty</td>
                         </tr>
-                        <tr>
-                            <td colspan="5">
-                                <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
-                            </td>
-                        </tr>
+
                     {% endfor %}
 
                     <tr>
                         <td colspan="3"><b>Order Total</b></td>
-                        <td><b>BGN{{ cart.get_total_price }}</b></td>
+                        <td><b>BGN {{ cart.get_total_price }}</b></td>
                     </tr>
                     <tr>
                         <td colspan="5">
                             <a class='btn btn-warning float-right ml-2' href='/checkout/'>Proceed to checkout</a>
-                            <button class='btn btn-primary'><a href="/">{% trans "Continue shopping" %}</a></button>
+                            <button class='btn btn-primary'><a
+                                    href="{% url 'browse' %}">{% trans "Continue shopping" %}</a></button>
                         </td>
                     </tr>
 
