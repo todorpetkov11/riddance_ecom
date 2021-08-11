@@ -58,7 +58,7 @@ def edit_product(request, pk):
             product.user = request.user
             product.save()
             formset.save()
-            return redirect('profile details')
+            return redirect('profile details', pk=request.user.id)
     else:
         product_form = ProductForm(instance=product_to_edit)
         formset = ImageFormSet(instance=product_to_edit)
@@ -77,10 +77,10 @@ def delete_product(request, pk):
     product = ProductModel.objects.get(pk=pk)
     if request.method == "POST":
         product.delete()
-        return redirect('profile details')
+        return redirect('profile details', pk=request.user.id)
     else:
         return render(request, 'product_templates/delete_product.html',
-                      {'product': product, 'page_name': 'delete product'})
+                      {'product': product, })
 
 
 @login_required()

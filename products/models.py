@@ -7,13 +7,15 @@ UserModel = get_user_model()
 
 class ProductModel(models.Model):
     CATEGORY_CHOICES = (
-        ('shorts', 'Shorts'),
-        ('tshirt', 'T-Shirts'),
-        ('blouses', 'Blouses'),
-        ('pants', 'Pants'),
-        ('boots', 'boots'),
-        ('flipflops', 'Flip-flops'),
-        ('tops', 'Tops'),
+        ('Shorts', 'Shorts'),
+        ('T-Shirts', 'T-Shirts'),
+        ('Shirts', 'Shirts'),
+        ('Blouses', 'Blouses'),
+        ('Pants', 'Pants'),
+        ('Shoes', 'Shoes'),
+        ('Boots', 'Boots'),
+        ('Flip-flops', 'Flip-flops'),
+        ('Tops', 'Tops'),
     )
     name = models.CharField(
         max_length=50)
