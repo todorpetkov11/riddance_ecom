@@ -1,0 +1,59 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="text-center">
+        {% if not profile.full_name %}
+            <h1>{{ profile.user }}</h1>
+        {% else %}
+            <h1>{{ profile.full_name }}</h1>
+        {% endif %}
+        {% if not profile.profile_image %}
+            <img class="rounded-circle mb-3"
+                 src="/static/no_image_pp.png"
+                 alt="Generic placeholder image"
+                 width="200" height="200">
+        {% else %}
+            <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}"
+                 alt="Generic placeholder image"
+                 width="200" height="200">
+        {% endif %}
+
+        {% if is_owner or request.user.is_staff or request.user.is_superuser %}
+            <h2>Contacts:</h2>
+            <h4>{{ profile.telephone_number }}</h4>
+            <h4>{{ request.user }}</h4>
+            <div class="w-50 m-auto">
+                <a href="{% url 'edit profile' profile.user_id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete account' profile.user_id %}" class="btn btn-danger">Delete</a>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if products %}
+        <h2 class='text-center' style="padding-bottom: 50px; padding-top: 50px">Published products</h2>
+        <div class="row">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-lg-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ product.thumbnail.url }}" class="card-img-top" alt="..." width="300"
+                                 height="300">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                                <p class="card-text"><strong></strong></p>
+                                <a href="{% url 'product details' product.id %}" class="btn btn-primary">See details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center">
+
+            <h2>You have no products</h2>
+            <a href="{% url 'add product' %}" class="btn btn-success">Add new product?</a>
+        </div>
+    {% endif %}
+{% endblock %}
