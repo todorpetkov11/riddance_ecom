@@ -22,15 +22,8 @@ class RiddanceProfile(models.Model):
         upload_to='profile', blank=True)
     full_name = models.CharField(
         max_length=50, blank=True)
+    telephone_number = models.CharField(max_length=10)
 
-
-class ShippingAddress(models.Model):
-    address = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=4)
-    city = models.CharField(max_length=20)
-    user = models.ForeignKey(
-        RiddanceUser, on_delete=models.CASCADE, primary_key=True, unique=True, related_name='shipping_address'
-    )
 
 
 from accounts.signals import *

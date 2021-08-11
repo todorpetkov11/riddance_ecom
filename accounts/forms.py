@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from accounts.models import RiddanceProfile, ShippingAddress
+from accounts.models import RiddanceProfile
 from core.forms import BootstrapFormMixin
 
 UserModel = get_user_model()
@@ -38,10 +38,6 @@ class UserRegisterForm(BootstrapFormMixin, UserCreationForm):
 class RiddanceProfileForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = RiddanceProfile
-        fields = ('profile_image', 'full_name')
+        exclude = ('user', )
 
 
-class ShippingAddressForm(BootstrapFormMixin, forms.ModelForm):
-    class Meta:
-        model = ShippingAddress
-        exclude = ('user',)
