@@ -1,12 +1,13 @@
 {% extends 'shared/base.html' %}
 {% load i18n %}
+{% load static %}
 {% block content %}
     <div class="container">
         <section class="mb-4">
             <div class="row wow fadeIn">
                 <div class='col-6 offset-3'>
                     <div class="text-lg-center">
-                        <h1 style="padding-bottom: 50px">{% trans "Add product" %}</h1>
+                        <h1 style="padding-bottom: 50px">{% trans "Add product" %} </h1>
                         <form class="signup" id="signup_form" method="post" action="{% url 'add product' %}"
                               enctype="multipart/form-data">
                             {% csrf_token %}

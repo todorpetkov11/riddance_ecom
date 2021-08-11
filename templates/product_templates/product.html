@@ -22,16 +22,19 @@
                 <div class="col-md-6 mb-4">
                     <div class="p-4">
                         <div class="mb-3">
-                            <a href="">
-                                {{ product.category }}
+                            <a href="{% url 'browse category' product.category %}" class="grey-text">
+                                <h5>{{ product.category }}</h5>
                             </a>
                         </div>
                         <p class="lead font-weight-bold">{{ product.name }}</p>
-                        <p class="lead font-weight">{{ product.user.profile.full_name }}</p>
+                        <p class="lead font-weight">Owner: <a
+                                href="{% url 'profile details' product.user.id %}">
+                            {{ product.user.profile.full_name }}</a>
+                        </p>
 
                         <h3 class="font-weight-bolder blue-text">
                             <span>BGN{{ product.price }}</span></h3>
-                        {% if is_owner %}
+                        {% if is_owner or request.user.is_staff or request.user.is_superuser %}
                             <div>
                                 <a href="{% url 'edit product' product.id %}" class="btn btn-primary">Edit</a>
                                 <a href="{% url 'delete product' product.id %}" class="btn btn-danger">Delete</a>
