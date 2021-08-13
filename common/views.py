@@ -25,6 +25,12 @@ class SearchResultsView(ListView):
         return object_list
 
 
+"""
+    Provides a searching query which returns only items with names or categories that contain
+    the given word.
+"""
+
+
 def browse_category(request, category):
     if category:
         products = ProductModel.objects.filter(category=category)
@@ -34,8 +40,18 @@ def browse_category(request, category):
     return render(request, 'browsing/category_search.html', context)
 
 
+"""
+    Clicking on the product category renders another page with items of the same category.
+"""
+
+
 class LandingView(TemplateView):
     template_name = 'landing.html'
+
+
+"""
+    Landing page view.
+"""
 
 
 def checkout(request):
@@ -54,8 +70,14 @@ def checkout(request):
         return render(request, 'orders_and_checkout/successful_order.html')
 
     else:
-        form = OrderForm
+        form = OrderForm()
         return render(request, 'orders_and_checkout/checkout.html', {'form': form, 'cart': cart, 'items': items})
+
+
+"""
+    Checkout view, which creates an order and sends it to the product owner for him to decide weather
+    he wants to accept it or not.
+"""
 
 
 def orders_details(request):
@@ -64,6 +86,11 @@ def orders_details(request):
         'orders': orders,
     }
     return render(request, 'orders_and_checkout/orders.html', context)
+
+
+"""
+    Displays a list of all the received orders.
+"""
 
 
 def accept_order(request, pk):
