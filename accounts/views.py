@@ -1,10 +1,8 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
 from accounts.forms import UserLoginForm, UserRegisterForm, RiddanceProfileForm
 from accounts.models import RiddanceProfile, RiddanceUser
-from cart.models import Cart
 from products.models import ProductModel
 
 
@@ -93,6 +91,7 @@ def delete_account(request, pk):
     if request.method == "POST":
         logout(request)
         account.delete()
+        profile.delete()
         return redirect('browse')
     else:
         return render(request, 'account_templates/delete_account.html', {'profile': profile})
