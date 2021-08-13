@@ -22,9 +22,9 @@ from riddanceecom import settings
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('common.urls')),
-                  path('', include('products.urls')),
+                  path('product/', include('products.urls')),
                   path('accounts/', include('accounts.urls')),
-                  path('', include('cart.urls'))
+                  path('cart/', include('cart.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'riddanceecom.views.handler404'
