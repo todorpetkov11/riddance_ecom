@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView
 from cart.views import get_cart
@@ -10,6 +11,18 @@ class BrowseView(ListView):
     model = ProductModel
     paginate_by = 8
     template_name = "browsing/index.html"
+
+
+class SearchResultsView(ListView):
+    model = ProductModel
+    template_name = 'browsing/search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        object_list = ProductModel.objects.filter(
+            Q(name__icontains=query) | Q(category__icontains=query)
+        )
+        return object_list
 
 
 def browse_category(request, category):

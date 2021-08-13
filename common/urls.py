@@ -1,6 +1,7 @@
 from django.urls import path
 
-from common.views import browse_category, LandingView, BrowseView, checkout, orders_details, accept_order, dismiss_order
+from common.views import browse_category, LandingView, BrowseView, checkout, orders_details, accept_order, \
+    dismiss_order, SearchResultsView
 
 urlpatterns = [
     path('', BrowseView.as_view(), name='browse'),
@@ -10,5 +11,6 @@ urlpatterns = [
     path('orders/', orders_details, name='orders'),
     path('accept_order/<int:pk>', accept_order, name='accept order'),
     path('dismiss_order/<int:pk>', dismiss_order, name='dismiss order'),
+    path('search/', SearchResultsView.as_view(), name='search results')
 
 ]
