@@ -1,0 +1,11 @@
+django==3.2.6
+pillow==8.3.1
+asgiref==3.4.1
+django-cleanup==5.2.0
+pip==21.2.2
+psycopg2==2.9.1
+python-decouple==3.4
+pytz==2021.1
+setuptools==57.4.0
+sqlparse==0.4.1
+typing-extensions==3.10.0.0
