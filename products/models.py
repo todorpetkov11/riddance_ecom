@@ -1,6 +1,9 @@
 from PIL import Image
 from django.contrib.auth import get_user_model
+from django.core.validators import FileExtensionValidator
 from django.db import models
+
+from products.validators import image_validator
 
 UserModel = get_user_model()
 
@@ -34,10 +37,10 @@ class ProductModel(models.Model):
         max_digits=6, decimal_places=2)
 
     thumbnail = models.FileField(
-        upload_to='products/thumbnails/'
+        upload_to='products/thumbnails/', validators=[image_validator]
     )
 
-    def save(self):
+    def save(self, *args, **kwargs):
         super(ProductModel, self).save()
         img = Image.open(self.thumbnail.path)
 
@@ -55,6 +58,6 @@ class ProductModel(models.Model):
 
 class ImageModel(models.Model):
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='images')
-    image = models.FileField(upload_to='products/')
+    image = models.FileField(upload_to='products/', validators=[image_validator])
     user = models.ForeignKey(
         UserModel, on_delete=models.CASCADE, null=True)
