@@ -2,27 +2,36 @@
 {% block content %}
     <div class="container">
         <div class="jumbotron parent">
-            <img style="width: 100%"
-                 src="../static/clothes.jpg" alt="">
+            <img style="width: 100%; padding-bottom: 50px"
+                 src="../static/clothes.jpg" alt="" class="rounded-pill">
             <div class="absolute">
-                <h1 class="display-4">Welcome to Riddance</h1>
-                <p class="lead"></p>
+                <h1 class="display-4">Welcome to Riddance!</h1>
+                <p class="lead">Leading website for clothes reselling!</p>
+                <hr class="my-3">
+                <p>Riddance gives you the opportunity to resell your clothes to other people</p>
+                <p>As well as that, it allows it's visitors to browse through numerous offers and find their
+                    new favourite fit!</p>
+                <p>All you have to do is find what you like, add it to the Cart and send the offer to the seller!</p>
+                <p1>Riddance does not take responsibility if the product doesn't arrive, as it is up to the seller
+                to take care of the shipping and contacting the buyer.</p1>
                 <hr class="my-4">
+
                 <div class="inner cover">
                     <h1 class="cover-heading"></h1>
                     <div class="row">
                         <div class="col-lg-6">
                             {% if not request.user.is_authenticated %}
-                            <p class="lead">Already have an account? <br><a href="{% url 'user login' %}"
-                                                                            class="btn btn-lg btn-secondary">Log in</a>
-                            </p>
-                        </div>
-                        <div class="col-lg-6">
-                            <p class="lead"> Do not have an account? <br>
-                                <a href="{% url 'user register' %}" class="btn btn-lg btn-secondary">Register</a>
-                            </p>
+                                <p class="lead">Already have an account? <br><a href="{% url 'user login' %}"
+                                                                                class="btn btn-lg btn-secondary">Log
+                                    in</a>
+                                </p>
+                                </div>
+                                <div class="col-lg-6">
+                                <p class="lead"> Do not have an account? <br>
+                                    <a href="{% url 'user register' %}" class="btn btn-lg btn-secondary">Register</a>
+                                </p>
                             {% endif %}
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>

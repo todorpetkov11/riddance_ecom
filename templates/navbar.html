@@ -6,10 +6,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+            <li style="margin-left: 10px">
+                <div class="input-group rounded">
+                    <form id="search_form" action="{% url 'search results' %}" method="get">
+                        <input name="query" class="form-control" type="text" placeholder="Search..."
+                               aria-describedby="search-addon">
+                    </form>
+                    <button form="search_form">
+                    <span class="input-group-text border-0" id="search-addon">
+    <i class="fas fa-search"></i>
+  </span>
+                    </button>
+                </div>
+            </li>
             <li class="nav-item"><a class="nav-link waves-effect" href="{% url 'landing' %}">About us</a></li>
             <li class="nav-item"><a class="nav-link waves-effect" href="{% url 'browse' %}">Browse</a></li>
             <li class="nav-item"><a class="nav-link waves-effect" href="{% url 'add product' %}">Add new product</a>
             </li>
+
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link waves-effect" href="{% url 'profile details' request.user.id %}">
@@ -25,7 +39,7 @@
                             <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
                         {% else %}
                             <i class="fas fa-shopping-cart"></i>
-                             Cart
+                            Cart
                         {% endif %}
                     </a>
                 </li>
@@ -35,6 +49,7 @@
                     </a>
 
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link waves-effect" href="{% url 'user logout' %}">
                         Logout
@@ -43,7 +58,7 @@
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link waves-effect" href="{% url 'user login' %}">
-                         Login
+                        Login
                     </a>
                 </li>
                 <li class="nav-item">

@@ -20,8 +20,10 @@
 
         {% if is_owner or request.user.is_staff or request.user.is_superuser %}
             <h2>Contacts:</h2>
-            <h4>{{ profile.telephone_number }}</h4>
-            <h4>{{ request.user }}</h4>
+            <h4>Phone: </h4>
+            <h5>{{ profile.telephone_number }}</h5>
+            <h4>Email: </h4>
+            <h5>{{ request.user }}</h5>
             <div class="w-50 m-auto">
                 <a href="{% url 'edit profile' profile.user_id %}" class="btn btn-primary">Edit</a>
                 <a href="{% url 'delete account' profile.user_id %}" class="btn btn-danger">Delete</a>
